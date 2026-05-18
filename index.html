@@ -159,10 +159,8 @@
           <div class="form-row">
             <div class="field">
               <label>Nationality <span class="req">*</span></label>
-              <select id="nationality" required>
-                <option value="">Select nationality</option>
-              </select>
-              <span class="field-error" id="nationality-err">Please select your nationality</span>
+              <input type="text" id="nationality" placeholder="e.g. French, Brazilian..." required>
+              <span class="field-error" id="nationality-err">Please enter your nationality</span>
             </div>
           </div>
         </div>
@@ -177,10 +175,8 @@
             </div>
             <div class="field">
               <label>Country of Residence <span class="req">*</span></label>
-              <select id="residenceCountry" required>
-                <option value="">Select country</option>
-              </select>
-              <span class="field-error" id="residenceCountry-err">Please select your country of residence</span>
+              <input type="text" id="residenceCountry" placeholder="e.g. Germany, USA..." required>
+              <span class="field-error" id="residenceCountry-err">Please enter your country of residence</span>
             </div>
           </div>
         </div>
@@ -208,10 +204,8 @@
           <div class="form-row">
             <div class="field">
               <label>Issuing Country <span class="req">*</span></label>
-              <select id="docCountry" required>
-                <option value="">Select country</option>
-              </select>
-              <span class="field-error" id="docCountry-err">Please select the issuing country</span>
+              <input type="text" id="docCountry" placeholder="e.g. Germany, USA..." required>
+              <span class="field-error" id="docCountry-err">Please enter the issuing country</span>
             </div>
           </div>
         </div>
@@ -254,55 +248,6 @@
 </div>
 
 <script>
-const COUNTRIES = [
-  ["AFG","Afghanistan"],["ALB","Albania"],["DZA","Algeria"],["AND","Andorra"],
-  ["AGO","Angola"],["ARG","Argentina"],["ARM","Armenia"],["AUS","Australia"],
-  ["AUT","Austria"],["AZE","Azerbaijan"],["BHS","Bahamas"],["BHR","Bahrain"],
-  ["BGD","Bangladesh"],["BLR","Belarus"],["BEL","Belgium"],["BRA","Brazil"],
-  ["BGR","Bulgaria"],["CAN","Canada"],["CHL","Chile"],["CHN","China"],
-  ["COL","Colombia"],["HRV","Croatia"],["CUB","Cuba"],["CYP","Cyprus"],
-  ["CZE","Czech Republic"],["DNK","Denmark"],["DOM","Dominican Republic"],
-  ["ECU","Ecuador"],["EGY","Egypt"],["EST","Estonia"],["ETH","Ethiopia"],
-  ["FIN","Finland"],["FRA","France"],["DEU","Germany"],["GHA","Ghana"],
-  ["GRC","Greece"],["GTM","Guatemala"],["HUN","Hungary"],["ISL","Iceland"],
-  ["IND","India"],["IDN","Indonesia"],["IRN","Iran"],["IRQ","Iraq"],
-  ["IRL","Ireland"],["ISR","Israel"],["ITA","Italy"],["JAM","Jamaica"],
-  ["JPN","Japan"],["JOR","Jordan"],["KAZ","Kazakhstan"],["KEN","Kenya"],
-  ["KOR","Korea, South"],["KWT","Kuwait"],["LVA","Latvia"],["LBN","Lebanon"],
-  ["LTU","Lithuania"],["LUX","Luxembourg"],["MYS","Malaysia"],["MLT","Malta"],
-  ["MEX","Mexico"],["MDA","Moldova"],["MCO","Monaco"],["MNG","Mongolia"],
-  ["MNE","Montenegro"],["MAR","Morocco"],["MOZ","Mozambique"],["NPL","Nepal"],
-  ["NLD","Netherlands"],["NZL","New Zealand"],["NGA","Nigeria"],["MKD","North Macedonia"],
-  ["NOR","Norway"],["OMN","Oman"],["PAK","Pakistan"],["PAN","Panama"],
-  ["PRY","Paraguay"],["PER","Peru"],["PHL","Philippines"],["POL","Poland"],
-  ["PRT","Portugal"],["QAT","Qatar"],["ROU","Romania"],["RUS","Russia"],
-  ["SAU","Saudi Arabia"],["SEN","Senegal"],["SRB","Serbia"],["SGP","Singapore"],
-  ["SVK","Slovakia"],["SVN","Slovenia"],["ZAF","South Africa"],["ESP","Spain"],
-  ["LKA","Sri Lanka"],["SWE","Sweden"],["CHE","Switzerland"],["SYR","Syria"],
-  ["TWN","Taiwan"],["TJK","Tajikistan"],["TZA","Tanzania"],["THA","Thailand"],
-  ["TUN","Tunisia"],["TUR","Turkey"],["UKR","Ukraine"],["ARE","United Arab Emirates"],
-  ["GBR","United Kingdom"],["USA","United States"],["URY","Uruguay"],
-  ["UZB","Uzbekistan"],["VEN","Venezuela"],["VNM","Vietnam"],["YEM","Yemen"],
-  ["ZMB","Zambia"],["ZWE","Zimbabwe"],["CPV","Cabo Verde"],["AGO","Angola"],
-  ["GNB","Guinea-Bissau"],["STP","São Tomé and Príncipe"],["TLS","Timor-Leste"]
-];
-
-// Populate all country selects
-function populateSelects() {
-  const selects = ['nationality','residenceCountry','docCountry'];
-  selects.forEach(id => {
-    const sel = document.getElementById(id);
-    COUNTRIES.forEach(([code, name]) => {
-      const opt = document.createElement('option');
-      opt.value = code;
-      opt.textContent = name;
-      sel.appendChild(opt);
-    });
-  });
-}
-
-populateSelects();
-
 // Validation
 const requiredFields = ['fullName','dob','nationality','residenceCountry','docNumber','docType','docCountry','checkin'];
 
@@ -349,16 +294,12 @@ document.getElementById('checkinForm').addEventListener('submit', async function
     fullName: document.getElementById('fullName').value.trim(),
     dob: document.getElementById('dob').value,
     birthPlace: document.getElementById('birthPlace').value.trim(),
-    nationality: document.getElementById('nationality').value,
-    nationalityName: document.getElementById('nationality').options[document.getElementById('nationality').selectedIndex].text,
+    nationality: document.getElementById('nationality').value.trim(),
     residenceCity: document.getElementById('residenceCity').value.trim(),
-    residenceCountry: document.getElementById('residenceCountry').value,
-    residenceCountryName: document.getElementById('residenceCountry').options[document.getElementById('residenceCountry').selectedIndex].text,
+    residenceCountry: document.getElementById('residenceCountry').value.trim(),
     docNumber: document.getElementById('docNumber').value.trim(),
-    docType: document.getElementById('docType').value,
-    docTypeName: document.getElementById('docType').options[document.getElementById('docType').selectedIndex].text,
-    docCountry: document.getElementById('docCountry').value,
-    docCountryName: document.getElementById('docCountry').options[document.getElementById('docCountry').selectedIndex].text,
+    docType: document.getElementById('docType').options[document.getElementById('docType').selectedIndex].text,
+    docCountry: document.getElementById('docCountry').value.trim(),
     checkin: document.getElementById('checkin').value,
     checkout: document.getElementById('checkout').value,
   };
